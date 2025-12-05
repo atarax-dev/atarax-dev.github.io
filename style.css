@@ -157,7 +157,7 @@ main {
 
 .tech-showcase {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     gap: 1.5rem;
     padding: 2rem;
     background: var(--bg-secondary);
@@ -478,6 +478,12 @@ main {
     line-height: 1.6;
 }
 
+.languages-container {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
 .languages {
     font-size: 1rem;
     color: var(--text-secondary);
@@ -561,7 +567,7 @@ main {
     }
 
     .tech-showcase {
-        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
         padding: 1.5rem;
     }
