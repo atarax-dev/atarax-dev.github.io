@@ -8,3 +8,4 @@ Sitemap: https://atarax-dev.github.io/sitemap.xml
 Disallow: /*.json$
 Disallow: /*.xml$
 
+
