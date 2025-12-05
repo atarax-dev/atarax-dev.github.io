@@ -86,5 +86,65 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // Calculate dynamic duration for "Présent" positions
+    function calculateDuration(startDate, endDate = null) {
+        const start = new Date(startDate);
+        const end = endDate ? new Date(endDate) : new Date();
+        
+        let years = end.getFullYear() - start.getFullYear();
+        let months = end.getMonth() - start.getMonth();
+        
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+        
+        if (end.getDate() < start.getDate()) {
+            months--;
+            if (months < 0) {
+                years--;
+                months += 11;
+            }
+        }
+        
+        if (years === 0) {
+            return months === 1 ? '1 mois' : `${months} mois`;
+        } else if (months === 0) {
+            return years === 1 ? '1 an' : `${years} ans`;
+        } else {
+            const yearsText = years === 1 ? '1 an' : `${years} ans`;
+            const monthsText = months === 1 ? '1 mois' : `${months} mois`;
+            return `${yearsText} ${monthsText}`;
+        }
+    }
+
+    // Update experience periods with "Présent"
+    const experiencePeriods = document.querySelectorAll('.experience-period');
+    experiencePeriods.forEach(period => {
+        const text = period.textContent;
+        if (text.includes('Présent')) {
+            // Extract start date from text (format: "octobre 2023 - Présent")
+            const match = text.match(/(\w+)\s+(\d{4})\s+-\s+Présent/);
+            if (match) {
+                const monthName = match[1].toLowerCase();
+                const year = parseInt(match[2]);
+                
+                // Convert French month name to number
+                const months = {
+                    'janvier': 0, 'février': 1, 'mars': 2, 'avril': 3, 'mai': 4, 'juin': 5,
+                    'juillet': 6, 'août': 7, 'septembre': 8, 'octobre': 9, 'novembre': 10, 'décembre': 11
+                };
+                
+                const month = months[monthName];
+                if (month !== undefined) {
+                    const startDate = new Date(year, month, 1);
+                    const duration = calculateDuration(startDate);
+                    // Update text: "octobre 2023 - Présent (X ans Y mois)"
+                    period.textContent = `${match[1]} ${year} - Présent (${duration})`;
+                }
+            }
+        }
+    });
 });
 
