@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audric Vernet - Architecte Logiciels</title>
+    <meta name="description" content="Audric Vernet - Architecte logiciels spécialisé en automatisation des infrastructures réseau et NetDevOps">
+    <meta name="keywords" content="Architecte logiciels, NetDevOps, Python, Django, Kubernetes, OpenShift, Automatisation réseau">
+    <meta name="author" content="Audric Vernet">
+    <title>Audric Vernet - Architecte Logiciels | NetDevOps</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 <body>
     <div class="container">
@@ -17,7 +21,12 @@
                 <p class="title">Architecte logiciels | Automatisation des infrastructures réseau</p>
                 <p class="location">Draguignan, Provence-Alpes-Côte d'Azur, France</p>
                 <div class="contact">
-                    <a href="mailto:audric.vernet@gmail.com" class="email">audric.vernet@gmail.com</a>
+                    <a href="mailto:audric.vernet@gmail.com" class="email">
+                        <i class="bi bi-envelope"></i> audric.vernet@gmail.com
+                    </a>
+                    <a href="https://www.linkedin.com/in/audric-vernet" target="_blank" rel="noopener noreferrer" class="linkedin">
+                        <i class="bi bi-linkedin"></i> LinkedIn
+                    </a>
                 </div>
             </div>
         </header>
@@ -34,28 +43,80 @@
                 <h2 class="section-title">Domaines d'expertise</h2>
                 <div class="expertise-grid">
                     <div class="expertise-item">
+                        <div class="expertise-icon">
+                            <i class="bi bi-code-slash"></i>
+                        </div>
                         <h3>Python / Django</h3>
                         <p>Algorithmie, APIs REST & GraphQL, microservices, packaging, gestion des files d'attente...</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">GraphQL</span>
+                            <span class="tech-tag">REST API</span>
+                        </div>
                     </div>
                     <div class="expertise-item">
+                        <div class="expertise-icon">
+                            <i class="bi bi-gear-fill"></i>
+                        </div>
                         <h3>Infrastructure as Code & CI/CD</h3>
                         <p>GitLab CI, Ansible, Terraform, GitOps</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">GitLab CI</span>
+                            <span class="tech-tag">Ansible</span>
+                            <span class="tech-tag">Terraform</span>
+                            <span class="tech-tag">GitOps</span>
+                        </div>
                     </div>
                     <div class="expertise-item">
+                        <div class="expertise-icon">
+                            <i class="bi bi-cloud"></i>
+                        </div>
                         <h3>Cloud & Conteneurs</h3>
                         <p>OpenStack, Docker/Podman, Kubernetes, Red Hat Openshift (multi-cluster)</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Kubernetes</span>
+                            <span class="tech-tag">OpenShift</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">OpenStack</span>
+                        </div>
                     </div>
                     <div class="expertise-item">
+                        <div class="expertise-icon">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
                         <h3>Observabilité & fiabilité</h3>
                         <p>Prometheus, Grafana, dashboards et alerting avancé</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Prometheus</span>
+                            <span class="tech-tag">Grafana</span>
+                            <span class="tech-tag">Alerting</span>
+                        </div>
                     </div>
                     <div class="expertise-item">
+                        <div class="expertise-icon">
+                            <i class="bi bi-diagram-3"></i>
+                        </div>
                         <h3>Réseau & automatisation</h3>
                         <p>Nornir, StackStorm, Nautobot/Netbox ...</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Nornir</span>
+                            <span class="tech-tag">StackStorm</span>
+                            <span class="tech-tag">Nautobot</span>
+                            <span class="tech-tag">Netbox</span>
+                        </div>
                     </div>
                     <div class="expertise-item">
+                        <div class="expertise-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
                         <h3>Sécurité & compliance</h3>
                         <p>Gestion des droits et des secrets, scans SCA/SAST, tests NRFU...</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">SCA/SAST</span>
+                            <span class="tech-tag">Vault</span>
+                            <span class="tech-tag">Compliance</span>
+                        </div>
                     </div>
                 </div>
                 <div class="expertise-note">
@@ -213,6 +274,12 @@
             <p>&copy; 2024 Audric Vernet</p>
         </footer>
     </div>
+    
+    <!-- Bouton retour en haut -->
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Retour en haut">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+    
     <script src="script.js"></script>
 </body>
 </html>

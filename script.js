@@ -13,7 +13,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe all sections for fade-in effect
+// Observe all sections and expertise items for fade-in effect
 document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('.section');
     sections.forEach(section => {
@@ -23,15 +23,44 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(section);
     });
 
-    // Add hover effect to email link
-    const emailLink = document.querySelector('.email');
-    if (emailLink) {
-        emailLink.addEventListener('mouseenter', () => {
-            emailLink.style.transform = 'translateY(-2px)';
+    // Animate expertise items with delay
+    const expertiseItems = document.querySelectorAll('.expertise-item');
+    expertiseItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+        observer.observe(item);
+    });
+
+    // Bouton retour en haut
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    
+    // Afficher/masquer le bouton selon le scroll
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollToTopBtn.classList.add('visible');
+        } else {
+            scrollToTopBtn.classList.remove('visible');
+        }
+    });
+
+    // Scroll vers le haut au clic
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
-        emailLink.addEventListener('mouseleave', () => {
-            emailLink.style.transform = 'translateY(0)';
+    });
+
+    // Animation des tags au survol
+    const techTags = document.querySelectorAll('.tech-tag');
+    techTags.forEach(tag => {
+        tag.addEventListener('mouseenter', () => {
+            tag.style.transform = 'scale(1.05)';
         });
-    }
+        tag.addEventListener('mouseleave', () => {
+            tag.style.transform = 'scale(1)';
+        });
+    });
 });
 
