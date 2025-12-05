@@ -178,6 +178,10 @@ main {
     transition: all 0.3s ease;
 }
 
+.openshift-logo {
+    padding: 0.5rem;
+}
+
 .tech-item-large:hover .tech-logo-large {
     transform: scale(1.1);
 }
