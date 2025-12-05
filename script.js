@@ -48,22 +48,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Bouton retour en haut
     const scrollToTopBtn = document.getElementById('scrollToTop');
     
-    // Afficher/masquer le bouton selon le scroll
-    window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
-            scrollToTopBtn.classList.add('visible');
-        } else {
-            scrollToTopBtn.classList.remove('visible');
-        }
-    });
-
-    // Scroll vers le haut au clic
-    scrollToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+    if (scrollToTopBtn) {
+        // Afficher/masquer le bouton selon le scroll
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
         });
-    });
+
+        // Scroll vers le haut au clic
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 
     // Animation des tags au survol
     const techTags = document.querySelectorAll('.tech-tag');

@@ -3,7 +3,7 @@
     --primary-dark: #1e40af;
     --secondary-color: #64748b;
     --text-primary: #0f172a;
-    --text-secondary: #475569;
+    --text-secondary: #334155;
     --bg-primary: #ffffff;
     --bg-secondary: #f8fafc;
     --border-color: #e2e8f0;
@@ -24,6 +24,27 @@ body {
     color: var(--text-primary);
     background-color: var(--bg-secondary);
     font-size: 16px;
+}
+
+/* Skip link for accessibility */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    z-index: 10000;
+    border-radius: 0 0 4px 0;
+    font-weight: 600;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 2px solid white;
+    outline-offset: 2px;
 }
 
 .container {
@@ -58,9 +79,6 @@ body {
 .header-content {
     position: relative;
     z-index: 1;
-}
-
-.header-content {
     max-width: 800px;
     margin: 0 auto;
 }
@@ -101,11 +119,12 @@ body {
     color: white;
     text-decoration: none;
     padding: 0.75rem 1.5rem;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.25);
     border-radius: 0.5rem;
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     font-size: 0.95rem;
+    font-weight: 500;
 }
 
 .email:hover,
@@ -202,6 +221,13 @@ main {
     background: var(--bg-secondary);
     border-radius: 1rem;
     border: 1px solid var(--border-color);
+}
+
+/* Tablet breakpoint for tech showcase */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .tech-showcase {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 .tech-item-large {
@@ -737,6 +763,26 @@ main {
 /* Smooth scrolling */
 html {
     scroll-behavior: smooth;
+}
+
+/* Focus styles for keyboard navigation */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 /* Bouton retour en haut */

@@ -6,6 +6,6 @@ Sitemap: https://atarax-dev.github.io/sitemap.xml
 
 # Disallow crawling of unnecessary files
 Disallow: /*.json$
-Disallow: /*.xml$
+# Note: sitemap.xml must be accessible, so we don't block .xml files
 
 

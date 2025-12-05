@@ -38,6 +38,9 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>">
     
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' https://cdn.jsdelivr.net https://raw.githubusercontent.com https://github.com data:; connect-src 'self';">
+    
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -109,6 +112,7 @@
     </script>
 </head>
 <body>
+    <a href="#main" class="skip-link">Aller au contenu principal</a>
     <div class="container">
         <header class="header">
             <div class="header-content">
@@ -117,16 +121,16 @@
                 <p class="location">Draguignan, Provence-Alpes-Côte d'Azur, France</p>
                 <div class="contact">
                     <a href="mailto:audric.vernet@gmail.com" class="email">
-                        <i class="bi bi-envelope"></i> audric.vernet@gmail.com
+                        <i class="bi bi-envelope" aria-hidden="true"></i> audric.vernet@gmail.com
                     </a>
                     <a href="https://www.linkedin.com/in/audric-vernet" target="_blank" rel="noopener noreferrer" class="linkedin">
-                        <i class="bi bi-linkedin"></i> LinkedIn
+                        <i class="bi bi-linkedin" aria-hidden="true"></i> LinkedIn
                     </a>
                 </div>
             </div>
         </header>
 
-        <main>
+        <main id="main">
             <section class="section">
                 <h2 class="section-title">Résumé</h2>
                 <p class="summary">
@@ -141,7 +145,7 @@
                     <h3 class="publication-title">
                         <a href="https://moisio.fr/2025/07/14/netdevops-2025-de-la-norme-rfc-9315-a-limplementation/" target="_blank" rel="noopener noreferrer">
                             NetDevOps 2025 : de la norme RFC 9315 à l'implémentation
-                            <i class="bi bi-box-arrow-up-right"></i>
+                            <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
                         </a>
                     </h3>
                     <p class="publication-meta">Audric Vernet • 14 juillet 2025 • Publié sur moisio.fr</p>
@@ -156,61 +160,61 @@
                 <div class="tech-showcase">
                     <div class="tech-item-large">
                         <div class="tech-logo-wrapper">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" class="tech-logo-large">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" class="tech-logo-large" loading="lazy" decoding="async">
                         </div>
                         <span class="tech-name">Python</span>
                     </div>
                     <div class="tech-item-large">
                         <div class="tech-logo-wrapper">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-plain.svg" alt="Django" class="tech-logo-large">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-plain.svg" alt="Django" class="tech-logo-large" loading="lazy" decoding="async">
                         </div>
                         <span class="tech-name">Django</span>
                     </div>
                     <div class="tech-item-large">
                         <div class="tech-logo-wrapper">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" class="tech-logo-large">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" class="tech-logo-large" loading="lazy" decoding="async">
                         </div>
                         <span class="tech-name">Kubernetes</span>
                     </div>
                     <div class="tech-item-large">
                         <div class="tech-logo-wrapper">
-                            <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/master/icons/redhatopenshift.svg" alt="OpenShift" class="tech-logo-large openshift-logo">
+                            <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/master/icons/redhatopenshift.svg" alt="OpenShift" class="tech-logo-large openshift-logo" loading="lazy" decoding="async">
                         </div>
                         <span class="tech-name">OpenShift</span>
                     </div>
                     <div class="tech-item-large">
                         <div class="tech-logo-wrapper">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker" class="tech-logo-large">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker" class="tech-logo-large" loading="lazy" decoding="async">
                         </div>
                         <span class="tech-name">Docker</span>
                     </div>
                     <div class="tech-item-large">
                         <div class="tech-logo-wrapper">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ansible/ansible-original.svg" alt="Ansible" class="tech-logo-large">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ansible/ansible-original.svg" alt="Ansible" class="tech-logo-large" loading="lazy" decoding="async">
                         </div>
                         <span class="tech-name">Ansible</span>
                     </div>
                     <div class="tech-item-large">
                         <div class="tech-logo-wrapper">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg" alt="Terraform" class="tech-logo-large">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg" alt="Terraform" class="tech-logo-large" loading="lazy" decoding="async">
                         </div>
                         <span class="tech-name">Terraform</span>
                     </div>
                     <div class="tech-item-large">
                         <div class="tech-logo-wrapper">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prometheus/prometheus-original.svg" alt="Prometheus" class="tech-logo-large">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prometheus/prometheus-original.svg" alt="Prometheus" class="tech-logo-large" loading="lazy" decoding="async">
                         </div>
                         <span class="tech-name">Prometheus</span>
                     </div>
                     <div class="tech-item-large">
                         <div class="tech-logo-wrapper">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/grafana/grafana-original.svg" alt="Grafana" class="tech-logo-large">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/grafana/grafana-original.svg" alt="Grafana" class="tech-logo-large" loading="lazy" decoding="async">
                         </div>
                         <span class="tech-name">Grafana</span>
                     </div>
                     <div class="tech-item-large">
                         <div class="tech-logo-wrapper">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gitlab/gitlab-original.svg" alt="GitLab" class="tech-logo-large">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gitlab/gitlab-original.svg" alt="GitLab" class="tech-logo-large" loading="lazy" decoding="async">
                         </div>
                         <span class="tech-name">GitLab</span>
                     </div>
@@ -228,15 +232,15 @@
                         <p>Algorithmie, APIs REST & GraphQL, microservices, packaging, gestion des files d'attente...</p>
                         <div class="tech-tags">
                             <span class="tech-tag">
-                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/python.svg" alt="Python" class="tech-logo">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/python.svg" alt="Python" class="tech-logo" loading="lazy" decoding="async">
                                 Python
                             </span>
                             <span class="tech-tag">
-                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/django.svg" alt="Django" class="tech-logo">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/django.svg" alt="Django" class="tech-logo" loading="lazy" decoding="async">
                                 Django
                             </span>
                             <span class="tech-tag">
-                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/graphql.svg" alt="GraphQL" class="tech-logo">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/graphql.svg" alt="GraphQL" class="tech-logo" loading="lazy" decoding="async">
                                 GraphQL
                             </span>
                             <span class="tech-tag">REST API</span>
@@ -250,15 +254,15 @@
                         <p>GitLab CI, Ansible, Terraform, GitOps</p>
                         <div class="tech-tags">
                             <span class="tech-tag">
-                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/gitlab.svg" alt="GitLab" class="tech-logo">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/gitlab.svg" alt="GitLab" class="tech-logo" loading="lazy" decoding="async">
                                 GitLab CI
                             </span>
                             <span class="tech-tag">
-                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/ansible.svg" alt="Ansible" class="tech-logo">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/ansible.svg" alt="Ansible" class="tech-logo" loading="lazy" decoding="async">
                                 Ansible
                             </span>
                             <span class="tech-tag">
-                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/terraform.svg" alt="Terraform" class="tech-logo">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/terraform.svg" alt="Terraform" class="tech-logo" loading="lazy" decoding="async">
                                 Terraform
                             </span>
                             <span class="tech-tag">GitOps</span>
@@ -272,19 +276,19 @@
                         <p>OpenStack, Docker/Podman, Kubernetes, Red Hat Openshift (multi-cluster)</p>
                         <div class="tech-tags">
                             <span class="tech-tag">
-                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/kubernetes.svg" alt="Kubernetes" class="tech-logo">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/kubernetes.svg" alt="Kubernetes" class="tech-logo" loading="lazy" decoding="async">
                                 Kubernetes
                             </span>
                             <span class="tech-tag">
-                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/redhatopenshift.svg" alt="OpenShift" class="tech-logo">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/redhatopenshift.svg" alt="OpenShift" class="tech-logo" loading="lazy" decoding="async">
                                 OpenShift
                             </span>
                             <span class="tech-tag">
-                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/docker.svg" alt="Docker" class="tech-logo">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/docker.svg" alt="Docker" class="tech-logo" loading="lazy" decoding="async">
                                 Docker
                             </span>
                             <span class="tech-tag">
-                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/openstack.svg" alt="OpenStack" class="tech-logo">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/openstack.svg" alt="OpenStack" class="tech-logo" loading="lazy" decoding="async">
                                 OpenStack
                             </span>
                         </div>
@@ -297,11 +301,11 @@
                         <p>Prometheus, Grafana, dashboards et alerting avancé</p>
                         <div class="tech-tags">
                             <span class="tech-tag">
-                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/prometheus.svg" alt="Prometheus" class="tech-logo">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/prometheus.svg" alt="Prometheus" class="tech-logo" loading="lazy" decoding="async">
                                 Prometheus
                             </span>
                             <span class="tech-tag">
-                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/grafana.svg" alt="Grafana" class="tech-logo">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/grafana.svg" alt="Grafana" class="tech-logo" loading="lazy" decoding="async">
                                 Grafana
                             </span>
                             <span class="tech-tag">Alerting</span>
@@ -329,7 +333,7 @@
                         <div class="tech-tags">
                             <span class="tech-tag">SCA/SAST</span>
                             <span class="tech-tag">
-                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/hashicorp.svg" alt="Vault" class="tech-logo">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/hashicorp.svg" alt="Vault" class="tech-logo" loading="lazy" decoding="async">
                                 Vault
                             </span>
                             <span class="tech-tag">Compliance</span>
@@ -354,7 +358,7 @@
                             <span class="project-type">Plugin Django</span>
                         </div>
                         <div class="project-achievement">
-                            <i class="bi bi-trophy"></i>
+                            <i class="bi bi-trophy" aria-hidden="true"></i>
                             <span>Participation - Fayat Innovation Challenge 2025</span>
                         </div>
                     </div>
@@ -363,11 +367,11 @@
                     </p>
                     <div class="project-tech">
                         <span class="project-tech-tag">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" class="tech-logo">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" class="tech-logo" loading="lazy" decoding="async">
                             Python 3.12
                         </span>
                         <span class="project-tech-tag">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-plain.svg" alt="Django" class="tech-logo">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-plain.svg" alt="Django" class="tech-logo" loading="lazy" decoding="async">
                             Django
                         </span>
                         <span class="project-tech-tag">NANO Framework v2</span>
@@ -471,7 +475,7 @@
     
     <!-- Bouton retour en haut -->
     <button id="scrollToTop" class="scroll-to-top" aria-label="Retour en haut">
-        <i class="bi bi-arrow-up"></i>
+        <i class="bi bi-arrow-up" aria-hidden="true"></i>
     </button>
     
     <script src="script.js"></script>
