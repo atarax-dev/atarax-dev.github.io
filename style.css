@@ -124,13 +124,11 @@ main {
 }
 
 .tech-showcase {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.5rem;
     padding: 2rem;
-    background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(37, 99, 235, 0.05) 100%);
+    background: var(--bg-secondary);
     border-radius: 1rem;
     border: 1px solid var(--border-color);
 }
@@ -139,40 +137,57 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
-    padding: 1.5rem;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem 1.5rem;
     background-color: var(--bg-primary);
     border-radius: 1rem;
-    border: 2px solid var(--border-color);
+    border: 1px solid var(--border-color);
     transition: all 0.3s ease;
-    min-width: 120px;
     box-shadow: var(--shadow);
+    min-height: 160px;
 }
 
 .tech-item-large:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     box-shadow: var(--shadow-lg);
     border-color: var(--primary-color);
-    background: linear-gradient(135deg, var(--bg-primary) 0%, rgba(37, 99, 235, 0.05) 100%);
+}
+
+.tech-logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    padding: 0.5rem;
+    background-color: var(--bg-secondary);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+}
+
+.tech-item-large:hover .tech-logo-wrapper {
+    background-color: rgba(37, 99, 235, 0.05);
+    transform: scale(1.05);
 }
 
 .tech-logo-large {
-    width: 64px;
-    height: 64px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     transition: all 0.3s ease;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .tech-item-large:hover .tech-logo-large {
     transform: scale(1.1);
-    filter: drop-shadow(0 4px 8px rgba(37, 99, 235, 0.3));
 }
 
 .tech-name {
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--text-primary);
     text-align: center;
+    margin-top: 0.5rem;
 }
 
 .expertise-grid {
@@ -497,22 +512,23 @@ main {
     }
 
     .tech-showcase {
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
         gap: 1rem;
         padding: 1.5rem;
     }
 
     .tech-item-large {
-        min-width: 100px;
-        padding: 1rem;
+        min-height: 140px;
+        padding: 1.5rem 1rem;
     }
 
-    .tech-logo-large {
-        width: 48px;
-        height: 48px;
+    .tech-logo-wrapper {
+        width: 64px;
+        height: 64px;
     }
 
     .tech-name {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
     }
 
     .scroll-to-top {

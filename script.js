@@ -9,7 +9,7 @@ const observer = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
             if (entry.target.classList.contains('tech-item-large')) {
-                entry.target.style.transform = 'translateY(0) scale(1)';
+                entry.target.style.transform = 'translateY(0)';
             } else {
                 entry.target.style.transform = 'translateY(0)';
             }
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const techItems = document.querySelectorAll('.tech-item-large');
     techItems.forEach((item, index) => {
         item.style.opacity = '0';
-        item.style.transform = 'translateY(20px) scale(0.9)';
+        item.style.transform = 'translateY(20px)';
         item.style.transition = `opacity 0.6s ease ${index * 0.08}s, transform 0.6s ease ${index * 0.08}s`;
         observer.observe(item);
     });
