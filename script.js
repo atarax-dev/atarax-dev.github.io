@@ -146,5 +146,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    // Update current year in footer
+    const currentYearElement = document.getElementById('current-year');
+    if (currentYearElement) {
+        currentYearElement.textContent = new Date().getFullYear();
+    }
 });
 
