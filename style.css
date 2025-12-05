@@ -143,6 +143,57 @@ main {
     color: var(--text-secondary);
 }
 
+.publication-item {
+    padding: 1.5rem;
+    background-color: var(--bg-secondary);
+    border-radius: 0.75rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.publication-item:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-color);
+}
+
+.publication-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.publication-title a {
+    color: var(--primary-color);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.publication-title a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+.publication-title a i {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+.publication-meta {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    font-style: italic;
+}
+
+.publication-abstract {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
 .tech-showcase {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
