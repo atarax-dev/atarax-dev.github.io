@@ -413,6 +413,25 @@ main {
     color: var(--primary-color);
 }
 
+.project-achievement {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    border-radius: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+.project-achievement i {
+    color: #ffc107;
+    font-size: 1rem;
+}
+
 .project-description {
     color: var(--text-secondary);
     line-height: 1.7;
