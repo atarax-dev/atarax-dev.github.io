@@ -180,7 +180,9 @@ main {
 }
 
 .tech-tag {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     padding: 0.25rem 0.75rem;
     background-color: var(--primary-color);
     color: white;
@@ -193,6 +195,14 @@ main {
 .tech-tag:hover {
     background-color: var(--primary-dark);
     transform: scale(1.05);
+}
+
+.tech-logo {
+    width: 16px;
+    height: 16px;
+    filter: brightness(0) invert(1);
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .expertise-note {
