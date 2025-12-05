@@ -1,19 +1,19 @@
-// Smooth animations on scroll
+// Smooth animations on scroll (optimized)
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
 };
 
+// Use requestAnimationFrame for better performance
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            if (entry.target.classList.contains('tech-item-large')) {
+    requestAnimationFrame(() => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
-            } else {
-                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target); // Stop observing once animated
             }
-        }
+        });
     });
 }, observerOptions);
 
@@ -49,12 +49,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollToTopBtn = document.getElementById('scrollToTop');
     
     if (scrollToTopBtn) {
-        // Afficher/masquer le bouton selon le scroll
+        // Afficher/masquer le bouton selon le scroll (throttled for performance)
+        let ticking = false;
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollToTopBtn.classList.add('visible');
-            } else {
-                scrollToTopBtn.classList.remove('visible');
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    if (window.pageYOffset > 300) {
+                        scrollToTopBtn.classList.add('visible');
+                    } else {
+                        scrollToTopBtn.classList.remove('visible');
+                    }
+                    ticking = false;
+                });
+                ticking = true;
             }
         });
 
@@ -67,15 +74,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Animation des tags au survol
-    const techTags = document.querySelectorAll('.tech-tag');
-    techTags.forEach(tag => {
-        tag.addEventListener('mouseenter', () => {
-            tag.style.transform = 'scale(1.05)';
+    // Animation des tags au survol (only on hover-capable devices)
+    if (window.matchMedia('(hover: hover)').matches) {
+        const techTags = document.querySelectorAll('.tech-tag');
+        techTags.forEach(tag => {
+            tag.addEventListener('mouseenter', () => {
+                tag.style.transform = 'scale(1.05)';
+            });
+            tag.addEventListener('mouseleave', () => {
+                tag.style.transform = 'scale(1)';
+            });
         });
-        tag.addEventListener('mouseleave', () => {
-            tag.style.transform = 'scale(1)';
-        });
-    });
+    }
 });
 
