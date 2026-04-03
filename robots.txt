@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://audricvernet.dev/sitemap.xml
+
+# Disallow crawling of unnecessary files
+Disallow: /*.json$
+# Note: sitemap.xml must be accessible, so we don't block .xml files
+
+
