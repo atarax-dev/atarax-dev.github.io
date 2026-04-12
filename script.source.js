@@ -100,7 +100,7 @@
                 current = theme;
 
                 // Swap l'image statique vers l'état final, attend qu'elle soit
-                // décodée, puis cache la vidéo — évite le fond noir si pas en cache
+                // décodée, puis cache la vidéo - évite le fond noir si pas en cache
                 // Remet la durée de transition à la valeur par défaut (hovers rapides)
                 html.style.removeProperty('--theme-transition-duration');
 
@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Calculate dynamic duration — locale-aware (FR/EN)
+    // Calculate dynamic duration - locale-aware (FR/EN)
     const isEN = document.documentElement.lang === 'en';
     const PRESENT = isEN ? 'Present' : 'Présent';
     const MONTH_NAMES = isEN

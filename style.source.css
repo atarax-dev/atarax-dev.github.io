@@ -127,7 +127,7 @@ body,
     overflow: hidden;                          /* clip iOS video overflow */
     border: 3px solid rgba(255, 255, 255, 0.35);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    /* Force GPU layer — évite le débordement Safari */
+    /* Force GPU layer - évite le débordement Safari */
     -webkit-mask-image: -webkit-radial-gradient(white, black);
     mask-image: radial-gradient(white, black);
 }
@@ -219,7 +219,7 @@ body,
     box-sizing: border-box;
 }
 
-/* Réserve la place des icônes Bootstrap avant leur chargement — évite le CLS */
+/* Réserve la place des icônes Bootstrap avant leur chargement - évite le CLS */
 .bi::before {
     display: inline-block;
     min-width: 1em;
