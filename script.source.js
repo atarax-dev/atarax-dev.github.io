@@ -18,6 +18,19 @@
         const toggleIcon  = toggleBtn.querySelector('.toggle-icon');
         const avatarStatic = document.getElementById('avatar-static');
         const avatarVideo  = document.getElementById('avatar-video');
+        const avatarAvif   = document.getElementById('avatar-avif');
+
+        // Photo : AVIF (<source>) avec repli WebP (<img>), 300 px en 1x, 600 px en 2x
+        const photoSet = (theme, ext) => ['300 1x', '600 2x']
+            .map(d => `${ASSET_BASE}img/photo-${theme}-${d.split(' ')[0]}.${ext} ${d.split(' ')[1]}`).join(', ');
+        function setPhoto(theme) {
+            if (avatarAvif) avatarAvif.srcset = photoSet(theme, 'avif');
+            avatarStatic.srcset = photoSet(theme, 'webp');
+            avatarStatic.src = `${ASSET_BASE}img/photo-${theme}-300.webp`;
+        }
+        // Vidéo de bascule : AV1 400 px si le navigateur le décode, sinon H.264 d'origine
+        const AV1 = avatarVideo.canPlayType && avatarVideo.canPlayType('video/mp4; codecs="av01.0.01M.08"') !== '';
+        const videoFor = name => ASSET_BASE + (AV1 ? `video/${name}.av1.mp4` : `${name}.mp4`);
 
         let current = html.getAttribute('data-theme') || DARK;
         let transitioning = false;
@@ -26,8 +39,7 @@
             if (transitioning) return;
 
             const goingLight = theme === LIGHT;
-            const videoSrc   = ASSET_BASE + (goingLight ? 'transition-to-light.mp4' : 'transition-to-dark.mp4');
-            const nextImg    = ASSET_BASE + (goingLight ? 'photo-light.webp' : 'photo-dark.webp');
+            const videoSrc   = videoFor(goingLight ? 'transition-to-light' : 'transition-to-dark');
 
             // Mise à jour UI du bouton
             const isEN = document.documentElement.lang === 'en';
@@ -39,7 +51,7 @@
 
             if (!animate) {
                 // Premier chargement : pas d'animation
-                avatarStatic.src = nextImg;
+                setPhoto(theme);
                 html.setAttribute('data-theme', theme);
                 localStorage.setItem(STORAGE_KEY, theme);
                 current = theme;
@@ -63,7 +75,7 @@
                 html.setAttribute('data-theme', theme);
                 localStorage.setItem(STORAGE_KEY, theme);
                 current = theme;
-                avatarStatic.src = nextImg;
+                setPhoto(theme);
                 transitioning = false;
             });
 
@@ -104,7 +116,7 @@
                 // Remet la durée de transition à la valeur par défaut (hovers rapides)
                 html.style.removeProperty('--theme-transition-duration');
 
-                avatarStatic.src = nextImg;
+                setPhoto(theme);
                 const hideVideo = () => {
                     avatarVideo.classList.remove('playing');
                     transitioning = false;
