@@ -214,54 +214,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Calculate dynamic duration - locale-aware (FR/EN)
-    const isEN = document.documentElement.lang === 'en';
-    const PRESENT = isEN ? 'Present' : 'Présent';
-    const MONTH_NAMES = isEN
-        ? { january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
-            july: 6, august: 7, september: 8, october: 9, november: 10, december: 11 }
-        : { janvier: 0, 'février': 1, mars: 2, avril: 3, mai: 4, juin: 5,
-            juillet: 6, 'août': 7, septembre: 8, octobre: 9, novembre: 10, 'décembre': 11 };
-
-    function calculateDuration(startDate) {
-        const start = new Date(startDate);
-        const end = new Date();
-
-        let years = end.getFullYear() - start.getFullYear();
-        let months = end.getMonth() - start.getMonth();
-
-        if (months < 0) { years--; months += 12; }
-        if (end.getDate() < start.getDate()) {
-            months--;
-            if (months < 0) { years--; months += 11; }
-        }
-
-        if (isEN) {
-            if (years === 0) return months === 1 ? '1 month' : `${months} months`;
-            if (months === 0) return years === 1 ? '1 year' : `${years} years`;
-            return `${years === 1 ? '1 year' : `${years} years`} ${months === 1 ? '1 month' : `${months} months`}`;
-        } else {
-            if (years === 0) return months === 1 ? '1 mois' : `${months} mois`;
-            if (months === 0) return years === 1 ? '1 an' : `${years} ans`;
-            return `${years === 1 ? '1 an' : `${years} ans`} ${months === 1 ? '1 mois' : `${months} mois`}`;
-        }
-    }
-
-    // Update experience periods with "Présent" / "Present"
-    document.querySelectorAll('.experience-period').forEach(period => {
-        const text = period.textContent;
-        if (text.includes(PRESENT)) {
-            const match = text.match(/(\w+)\s+(\d{4})\s+-\s+(?:Présent|Present)/);
-            if (match) {
-                const month = MONTH_NAMES[match[1].toLowerCase()];
-                if (month !== undefined) {
-                    const duration = calculateDuration(new Date(parseInt(match[2]), month, 1));
-                    period.textContent = `${match[1]} ${match[2]} - ${PRESENT} (${duration})`;
-                }
-            }
-        }
-    });
-
     // Update current year in footer
     const currentYearElement = document.getElementById('current-year');
     if (currentYearElement) {
@@ -269,3 +221,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+
+// ── Durées d'expérience calculées à partir de data-start / data-end (AAAA-MM) ──
+(function () {
+    const en = document.documentElement.lang.startsWith('en');
+    const now = new Date();
+    const toMonths = v => {
+        if (v === 'present') return now.getFullYear() * 12 + now.getMonth();
+        const [y, m] = v.split('-').map(Number);
+        return y * 12 + (m - 1);
+    };
+    const unit = (n, one, many) => n + ' ' + (n > 1 ? many : one);
+    document.querySelectorAll('[data-start][data-end]').forEach(el => {
+        const total = toMonths(el.dataset.end) - toMonths(el.dataset.start);
+        if (!(total >= 0)) return;
+        const y = Math.floor(total / 12), m = total % 12;
+        const parts = [];
+        if (y) parts.push(en ? unit(y, 'year', 'years') : unit(y, 'an', 'ans'));
+        if (m || !y) parts.push(en ? unit(m, 'month', 'months') : m + ' mois');
+        el.textContent = parts.join(' ');
+    });
+})();
