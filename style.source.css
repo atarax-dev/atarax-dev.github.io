@@ -1092,7 +1092,10 @@ main{padding:24px 32px 64px;counter-reset:s}
 .publication-item:hover,.project-item:hover{border-color:var(--rule)}
 .expertise-note{border-left:0;border-top:3px solid var(--rule)}
 .experience-title,.project-title,.publication-title,.education-title,.expertise-item h3{font-family:"Space Grotesk",sans-serif;font-weight:600}
-.publication-title a{color:var(--text-primary);text-decoration:underline;text-decoration-color:var(--primary-color);text-decoration-thickness:2px;text-underline-offset:4px;display:inline-flex;min-height:44px;align-items:center}
+.publication-title a{color:var(--text-primary);text-decoration:underline;text-decoration-color:var(--primary-color);text-decoration-thickness:2px;text-underline-offset:4px;display:inline;line-height:1.6;padding:10px 0}
+/* titre long sur plusieurs lignes : l'icône suit le dernier mot (dernier mot + icône dans un span .nowrap) au lieu d'être rejetée à droite */
+.publication-title a svg{display:inline-block;vertical-align:-.1em;margin-left:.15em}
+.publication-title .nowrap{white-space:nowrap}
 .highlight,.expertise-note .highlight{color:var(--mark-fg);background:none;padding:0;font-weight:600;text-decoration:underline;text-decoration-color:var(--mark-bg);text-decoration-thickness:.35em;text-underline-offset:-.2em;text-decoration-skip-ink:none}
 .tech-tag,.project-tech-tag{background:transparent;color:var(--text-primary);border:1px solid var(--text-primary);border-radius:4px;font-family:"Space Grotesk",sans-serif}
 [data-theme="dark"] .tech-tag,[data-theme="dark"] .project-tech-tag{background:#1d1f18;border:1px solid #2b2d25}
