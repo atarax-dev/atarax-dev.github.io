@@ -53,6 +53,17 @@ async function build() {
         fs.writeFileSync('en/index.html', htmlENResult);
         console.log(`HTML EN: ${(htmlENInput.length/1024).toFixed(1)}KB → ${(htmlENResult.length/1024).toFixed(1)}KB`);
     }
+    // ── CSP : empreinte sha256 des scripts inline (choix de la photo selon le thème) ──
+    const crypto = require('crypto');
+    for (const f of ['index.html', 'en/index.html']) {
+        if (!fs.existsSync(f)) continue;
+        let h = fs.readFileSync(f, 'utf8');
+        const hashes = [...h.matchAll(/<script>([\s\S]*?)<\/script>/g)]
+            .map(m => `'sha256-${crypto.createHash('sha256').update(m[1]).digest('base64')}'`);
+        h = h.replace(/script-src [^;]*;/, `script-src 'self' ${[...new Set(hashes)].join(' ')};`);
+        fs.writeFileSync(f, h);
+        console.log(`CSP  : ${f} ${hashes.length} script(s) inline hashé(s)`);
+    }
 }
 
 build().catch(console.error);
