@@ -370,31 +370,29 @@ main {
 .podcast-item {
     display: flex;
     gap: 1.25rem;
-    margin-top: 1.25rem;
-    padding: 1.25rem;
-    background-color: var(--bg-secondary);
-    border-radius: 0.75rem;
-    border: 1px solid var(--border-color);
+    margin-top: 0;
+    padding: 20px 0;
+    background-color: transparent;
+    border: 0;
+    border-top: 1px solid var(--border-color);
     text-decoration: none;
     color: inherit;
-    transition: background-color var(--theme-transition-duration) ease, border-color var(--theme-transition-duration) ease, box-shadow 0.3s ease, transform 0.2s ease;
+    transition: border-color var(--theme-transition-duration) ease;
     align-items: center;
 }
 
 .podcast-item:hover {
-    box-shadow: var(--shadow-md);
-    border-color: var(--primary-color);
-    transform: translateY(-2px);
+    border-top-color: var(--rule);
 }
 
 .podcast-thumbnail-wrapper {
     position: relative;
     flex-shrink: 0;
     width: 200px;
-    border-radius: 0.5rem;
+    border-radius: 0;
     overflow: hidden;
     aspect-ratio: 16/9;
-    background: #000;
+    background: var(--ink);
 }
 
 .podcast-thumbnail {
@@ -479,12 +477,12 @@ main {
 
 .tech-showcase {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1.5rem;
-    padding: 2rem;
-    background: var(--bg-secondary);
-    border-radius: 1rem;
+    grid-template-columns: repeat(5,1fr);
+    gap: 1px;
+    padding: 0;
+    background: var(--border-color);
     border: 1px solid var(--border-color);
+    border-radius: 0;
 }
 
 /* Tablet breakpoint for tech showcase */
@@ -499,95 +497,93 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
-    padding: 2rem 1.5rem;
+    gap: 12px;
+    padding: 24px 12px;
     background-color: var(--bg-primary);
-    border-radius: 1rem;
-    border: 1px solid var(--border-color);
-    transition: background-color var(--theme-transition-duration) ease, border-color var(--theme-transition-duration) ease, transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: var(--shadow);
-    min-height: 160px;
+    border: 0;
+    border-radius: 0;
+    box-shadow: inset 0 0 0 0 var(--rule);
+    transition: background-color var(--theme-transition-duration) ease,box-shadow .2s ease;
+    min-height: 140px;
 }
 
 .tech-item-large:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--primary-color);
+    box-shadow: inset 0 -3px 0 0 var(--rule);
 }
 
 .tech-logo-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 80px;
-    height: 80px;
-    padding: 0.5rem;
-    background-color: var(--bg-secondary);
-    border-radius: 1rem;
-    transition: background-color var(--theme-transition-duration) ease, transform 0.3s ease;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
 }
 
 .tech-item-large:hover .tech-logo-wrapper {
-    background-color: var(--bg-primary);
-    transform: scale(1.05);
+    background: transparent;
 }
 
 .tech-logo-large {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    transition: all 0.3s ease;
 }
 
 .openshift-logo {
-    padding: 0.5rem;
+    padding: 2px;
+    transition: filter var(--theme-transition-duration) ease;
 }
 
 .tech-item-large:hover .tech-logo-large {
-    transform: scale(1.1);
+    transform: none;
 }
 
 .tech-name {
-    font-size: 1rem;
+    font-family: "Space Grotesk",sans-serif;
+    font-size: 14px;
     font-weight: 600;
+    letter-spacing: .02em;
     color: var(--text-primary);
     text-align: center;
-    margin-top: 0.5rem;
+    margin-top: 0;
 }
 
 .expertise-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 0 40px;
+    margin-bottom: 24px;
 }
 
 .expertise-item {
-    padding: 1.5rem;
-    background-color: var(--bg-secondary);
-    border-radius: 0.75rem;
-    border: 1px solid var(--border-color);
-    transition: background-color var(--theme-transition-duration) ease, border-color var(--theme-transition-duration) ease, transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 20px 0;
+    background: transparent;
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    border-radius: 0;
     position: relative;
+    transition: border-color var(--theme-transition-duration) ease;
 }
 
 .expertise-item:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--primary-color);
+    border-top-color: var(--rule);
 }
 
 .expertise-icon {
-    width: 3rem;
-    height: 3rem;
+    width: 40px;
+    height: 40px;
     background: var(--primary-color);
-    border-radius: 0.75rem;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1rem;
+    margin-bottom: 14px;
     color: var(--bg-primary);
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 .expertise-item h3 {
@@ -625,14 +621,16 @@ main {
 }
 
 .tech-tag:hover {
-    background-color: var(--ink);
-    transform: scale(1.05);
+    background-color: transparent;
+    border-color: var(--rule);
+    box-shadow: inset 0 0 0 1px var(--rule);
+    transform: none;
 }
 
 .tech-logo {
     width: 16px;
     height: 16px;
-    filter: brightness(0) invert(1);
+    filter: brightness(0);
     display: inline-block;
     vertical-align: middle;
 }
@@ -655,8 +653,7 @@ main {
 }
 
 .project-item:hover {
-    box-shadow: var(--shadow-md);
-    border-color: var(--primary-color);
+    border-top-color: var(--rule);
 }
 
 .project-header {
@@ -691,15 +688,15 @@ main {
 .project-achievement {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%);
-    border: 1px solid rgba(255, 193, 7, 0.3);
-    border-radius: 1rem;
-    font-size: 0.9rem;
+    gap: .5rem;
+    padding: 6px 12px;
+    background: transparent;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    font-size: .9rem;
     color: var(--text-primary);
     font-weight: 500;
-    margin-top: 0.5rem;
+    margin-top: .5rem;
 }
 
 .project-achievement i {
@@ -735,14 +732,16 @@ main {
 }
 
 .project-tech-tag:hover {
+    background-color: transparent;
     border-color: var(--rule);
-    background-color: var(--ink);
+    box-shadow: inset 0 0 0 1px var(--rule);
 }
 
 .project-tech-tag .tech-logo {
     width: 14px;
     height: 14px;
     filter: none;
+    border-radius: 2px;
 }
 
 .experience-item {
@@ -750,7 +749,7 @@ main {
 }
 
 .experience-item:hover {
-    box-shadow: var(--shadow-md);
+    border-top-color: var(--rule);
 }
 
 .experience-header {
@@ -787,12 +786,12 @@ main {
 
 .experience-duration {
     display: inline-block;
-    font-size: 0.85rem;
+    font-size: .85rem;
     color: var(--secondary-color);
-    background-color: var(--bg-primary);
-    padding: 0.25rem 0.75rem;
-    border-radius: 1rem;
-    margin-top: 0.5rem;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    margin-top: .5rem;
 }
 
 .experience-location {
@@ -832,10 +831,11 @@ main {
 
 .experience-note {
     margin-top: 1rem;
-    padding: 1rem;
-    background-color: var(--bg-primary);
-    border-radius: 0.5rem;
-    font-size: 0.9rem;
+    padding: 0 0 0 16px;
+    background: transparent;
+    border-left: 3px solid var(--rule);
+    border-radius: 0;
+    font-size: .9rem;
     color: var(--text-secondary);
     line-height: 1.6;
 }
@@ -870,8 +870,7 @@ main {
 }
 
 .education-item-transition {
-    border-left: 4px solid #667eea;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    border-left: 0;
 }
 
 .education-note {
@@ -890,10 +889,11 @@ main {
 
 .languages {
     font-size: 1rem;
-    color: var(--text-secondary);
-    padding: 1rem;
-    background-color: var(--bg-secondary);
-    border-radius: 0.5rem;
+    color: var(--text-primary);
+    padding: 10px 16px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
     display: inline-block;
 }
 
@@ -941,18 +941,15 @@ main {
 
     .tech-showcase {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-        padding: 1.5rem;
     }
 
     .tech-item-large {
-        min-height: 140px;
-        padding: 1.5rem 1rem;
+        min-height: 120px;
     }
 
     .tech-logo-wrapper {
-        width: 64px;
-        height: 64px;
+        width: 40px;
+        height: 40px;
     }
 
     .tech-name {
@@ -992,8 +989,8 @@ button:focus-visible {
         scroll-behavior: auto !important;
     }
     
-    body::before,
-    body::after {
+    body: :before,
+    body: :after {
         animation: none !important;
     }
 }
@@ -1096,10 +1093,12 @@ main{padding:24px 32px 64px;counter-reset:s}
 .expertise-note{border-left:0;border-top:3px solid var(--rule)}
 .experience-title,.project-title,.publication-title,.education-title,.expertise-item h3{font-family:"Space Grotesk",sans-serif;font-weight:600}
 .publication-title a{color:var(--text-primary);text-decoration:underline;text-decoration-color:var(--primary-color);text-decoration-thickness:2px;text-underline-offset:4px;display:inline-flex;min-height:44px;align-items:center}
-.highlight,.expertise-note .highlight{color:var(--mark-fg);background:var(--mark-bg);padding:0 .2em;font-weight:600}
-.tech-tag,.project-tech-tag{background:var(--ink);color:var(--os);border-radius:4px;font-family:"Space Grotesk",sans-serif}
+.highlight,.expertise-note .highlight{color:var(--mark-fg);background:none;padding:0;font-weight:600;text-decoration:underline;text-decoration-color:var(--mark-bg);text-decoration-thickness:.35em;text-underline-offset:-.2em;text-decoration-skip-ink:none}
+.tech-tag,.project-tech-tag{background:transparent;color:var(--text-primary);border:1px solid var(--text-primary);border-radius:4px;font-family:"Space Grotesk",sans-serif}
 [data-theme="dark"] .tech-tag,[data-theme="dark"] .project-tech-tag{background:#1d1f18;border:1px solid #2b2d25}
-.tech-item-large,.expertise-item,.tech-logo-wrapper{background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:6px;box-shadow:none}
+[data-theme="dark"] .openshift-logo,[data-theme="dark"] .tech-logo-large[alt="Django"]{filter:brightness(0) invert(.96)}
+[data-theme="dark"] .tech-tag .tech-logo{filter:brightness(0) invert(1)}
+[data-theme="dark"] .project-tech-tag .tech-logo{background:var(--os);padding:1px}
 .experience-period,.education-period,.project-period,.experience-duration{font-family:"Space Grotesk",sans-serif;color:var(--secondary-color)}
 .footer{font-size:.9rem;background:transparent;border-top:3px solid var(--rule);margin:0 32px;padding:24px 0 48px;text-align:left;color:var(--secondary-color)}
 .scroll-to-top{background:var(--primary-color);color:var(--bg-primary);border-radius:6px;width:48px;height:48px}
