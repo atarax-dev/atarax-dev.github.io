@@ -18,6 +18,14 @@ async function build() {
     fs.writeFileSync('script.js', jsResult.code);
     console.log(`JS   : ${(jsInput.length/1024).toFixed(1)}KB → ${(jsResult.code.length/1024).toFixed(1)}KB`);
 
+    // ── JS easter egg (coin mosaïque + bonhomme) ──
+    for (const name of ['mosaique', 'bonhomme']) {
+        const input = fs.readFileSync(`${name}.source.js`, 'utf8');
+        const result = await minifyJS(input, { compress: true, mangle: true });
+        fs.writeFileSync(`${name}.js`, result.code);
+        console.log(`JS   : ${name} ${(input.length/1024).toFixed(1)}KB → ${(result.code.length/1024).toFixed(1)}KB`);
+    }
+
     // ── Inject SVG icons (remplace Bootstrap Icons) ──
     require('./inject-icons.js');
 
