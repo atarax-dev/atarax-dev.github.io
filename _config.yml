@@ -1,0 +1,14 @@
+# GitHub Pages (build Jekyll par défaut) : ne publier que les fichiers servis.
+# Les sources, l'outillage et la documentation interne restent dans le dépôt
+# mais ne sont plus accessibles sur audricvernet.dev.
+exclude:
+  - "*.md"
+  - "*.source.js"
+  - "*.source.css"
+  - build.js
+  - inject-icons.js
+  - package.json
+  - package-lock.json
+  - node_modules
+  - .gitignore
+  - photo-light.webp
