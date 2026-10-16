@@ -58,7 +58,7 @@
       if (cut) { let b = 99;
         for (let rr = Z0R - 3; rr < ROWS; rr++) for (let cc = Z0C - 3; cc < COLS; cc++)
           if (!voidHit(cc, rr)) { const h = Math.hypot(cc - c, rr - r); if (h < b) { b = h; ec = cc; er = rr; } } }
-      tiles.push({ c, r, cut, d, ec, er, p: 0, v: 0, tg: 0, delay: 0, seed: Math.random() });
+      tiles.push({ c, r, cut, d, ec, er, p: 0, v: 0, tg: 0, want: 0, z: 0, zv: 0, delay: 0, seed: Math.random() });
     }
   }
 
@@ -110,6 +110,8 @@
         t.zv += (-260 * (t.z - zt) - 2 * Math.sqrt(260) * .7 * t.zv) * dt; t.z += t.zv * dt;
         if (Math.abs(t.z - zt) > .001 || Math.abs(t.zv) > .001) moving = true; else { t.z = zt; t.zv = 0; }
       }
+      if (!Number.isFinite(t.p) || !Number.isFinite(t.v)) { t.p = tg || 0; t.v = 0; }   // garde-fou
+      if (!Number.isFinite(t.z) || !Number.isFinite(t.zv)) { t.z = 0; t.zv = 0; }
       const a = -K * (t.p - tg) - D * t.v;
       t.v += a * dt; t.p += t.v * dt;
       if (Math.abs(t.p - tg) > 0.001 || Math.abs(t.v) > 0.001) moving = true; else { t.p = tg; t.v = 0; }
@@ -163,7 +165,13 @@
   wrap.style.pointerEvents = 'auto'; wrap.style.touchAction = 'manipulation';
   // pendant la vidéo de bascule, la source est la vidéo : on redessine si un état est affiché
   vid && vid.addEventListener('timeupdate', () => { if (!raf && tiles.some(t => t.p)) render(); });
-  addEventListener('resize', () => { layout(); render(); });
-  const init = () => { layout(); };
+  // redimensionnement / rotation : la grille est reconstruite ; si le coin est affiché, il reste affiché (sans rejouer la cascade)
+  addEventListener('resize', () => {
+    if (!W) return;                          // pas encore initialisé
+    layout();
+    if (active) tiles.forEach(t => { t.want = t.tg = t.p = t.cut ? 1 : 0; });
+    render(); if (active) kick();
+  });
+  const init = () => { layout(); if (active) setTargets(true); };
   img.complete ? init() : img.addEventListener('load', init, { once: true });
 })();
