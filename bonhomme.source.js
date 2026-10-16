@@ -108,12 +108,13 @@
     const em = rect('.email'), li = rect('.linkedin');
     const vis = r => r && r.top >= 40 && r.bottom <= innerHeight - 8;
     let phase = reduce.matches ? 'still' : 'fall';
+    let ended = false;
     if (em && li && !(vis(em) && vis(li))) {
+      if (!reduce.matches) { phase = 'wait'; addEventListener('scrollend', () => { ended = true; }, { once: true }); }
       document.querySelector('.email').scrollIntoView({ block: 'center', behavior: reduce.matches ? 'auto' : 'smooth' });
-      if (!reduce.matches) phase = 'wait';
     }
     // la chute part juste au-dessus du haut de l'écran visible
-    S = { phase, next: reduce.matches ? 'still' : 'fall', t: t0, last: t0, x: 0, y: -40, vx: 0, vy: 0, rot: 0, ph: 0, v: 0, py: null, calm: 0 };
+    S = { phase, vis, ended: () => ended, next: reduce.matches ? 'still' : 'fall', t: t0, last: t0, x: 0, y: -40, vx: 0, vy: 0, rot: 0, ph: 0, v: 0, py: null, calm: 0 };
     raf = requestAnimationFrame(step);
   }
   function step(now) {
@@ -125,9 +126,11 @@
     const G = 2300, gy = top(em), ly = top(li), stacked = Math.abs(li.top - em.top) > 10;
     let neck = null;
     switch (s.phase) {
-      case 'wait': { // attend la fin du défilement (position stable 6 images, ou 1,2 s max)
+      case 'wait': { // fin du défilement : boutons à l'écran ET (scrollend, ou position stable 6 images) ; 1,5 s max
+        // (la chute relit de toute façon les positions à chaque image)
         s.calm = s.py !== null && Math.abs(em.top - s.py) < .5 ? s.calm + 1 : 0; s.py = em.top;
-        if (s.calm >= 6 || pt > 1.2) go(s.next); break; }
+        const inView = s.vis(em) && s.vis(li);
+        if ((inView && (s.ended() || s.calm >= 6)) || pt > 1.5) go(s.next); break; }
       case 'still': { ctx.globalAlpha = clamp(Math.min(pt / .2, (1.4 - pt) / .3), 0, 1);
         neck = draw(standP(pt % .6 < .3 ? 0 : -.3), em.left + 30, gy - STAND * K); ctx.globalAlpha = 1;
         if (pt > 1.4) { ctx.clearRect(0, 0, cv.width, cv.height); raf = 0; return; } break; }
