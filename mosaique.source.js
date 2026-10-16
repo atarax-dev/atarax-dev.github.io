@@ -93,7 +93,8 @@
   const onSecret = e => { const t = secret(); if (!t || !active || t.p < .9) return false;
     const r = hitbox.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
     return x >= t.c * T && x < (t.c + 1) * T && y >= t.r * T && y < (t.r + 1) * T; };
-  const kick = () => { if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } };
+  // seul point d'entrée de la boucle : jamais d'animation sous prefers-reduced-motion
+  const kick = () => { if (reduce.matches) return; if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } };
   let last = 0;
   function frame(now) {
     const dt = Math.min(1 / 30, (now - last) / 1000); last = now;
@@ -117,7 +118,7 @@
       if (Math.abs(t.p - tg) > 0.001 || Math.abs(t.v) > 0.001) moving = true; else { t.p = tg; t.v = 0; }
     });
     render();
-    raf = moving || (active && pointer.in) ? requestAnimationFrame(frame) : 0;
+    raf = !reduce.matches && (moving || (active && pointer.in)) ? requestAnimationFrame(frame) : 0;
   }
 
   function render() {
@@ -170,7 +171,7 @@
     if (!W) return;                          // pas encore initialisé
     layout();
     if (active) tiles.forEach(t => { t.want = t.tg = t.p = t.cut ? 1 : 0; });
-    render(); if (active) kick();
+    render(); if (active) kick();            // kick() ne fait rien en mouvement réduit : état figé redessiné une fois
   });
   const init = () => { layout(); if (active) setTargets(true); };
   img.complete ? init() : img.addEventListener('load', init, { once: true });
