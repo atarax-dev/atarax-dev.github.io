@@ -92,7 +92,11 @@
   const secret = () => tiles.find(t => t.c === SC && t.r === SR && t.cut);
   const onSecret = e => { const t = secret(); if (!t || !active || t.p < .9) return false;
     const r = hitbox.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
-    return x >= t.c * T && x < (t.c + 1) * T && y >= t.r * T && y < (t.r + 1) * T; };
+    // au doigt : zone de tap invisible de 44 px centrée sur la tuile (la tuile visible reste petite)
+    const half = e.pointerType === 'mouse' ? T / 2 : Math.max(T / 2, 22);
+    const cx = (t.c + .5) * T, cy = (t.r + .5) * T;
+    return Math.abs(x - cx) <= half && Math.abs(y - cy) <= half; };
+  const touchUI = matchMedia('(hover: none)');
   // seul point d'entrée de la boucle : jamais d'animation sous prefers-reduced-motion
   const kick = () => { if (reduce.matches) return; if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } };
   let last = 0;
@@ -146,8 +150,9 @@
         ctx.globalAlpha = Math.min(1, base * (1 + z * .6));
         ctx.fillStyle = dark ? `rgb(${ACID})` : `rgb(${Math.round(198 - 40 * t.seed)},${Math.round(240 - 30 * t.seed)},${26})`;
         ctx.fillRect(x, y, w, w);
-        if (t === secret() && p > .9) {          // scintillement rare (~1 fois / 6 s, 140 ms)
-          const ph = performance.now() % 6000; if (ph < 140) { ctx.globalAlpha = .35 * Math.sin(ph / 140 * Math.PI); ctx.fillStyle = '#fff'; ctx.fillRect(x, y, w, w); }
+        if (t === secret() && p > .9) {          // scintillement rare (~1 fois / 6 s, 140 ms ; au doigt 1 fois / 3 s, plus marqué)
+          const tu = touchUI.matches, P = tu ? 3000 : 6000, D = tu ? 260 : 140;
+          const ph = performance.now() % P; if (ph < D) { ctx.globalAlpha = (tu ? .6 : .35) * Math.sin(ph / D * Math.PI); ctx.fillStyle = '#fff'; ctx.fillRect(x, y, w, w); }
         } });
       ctx.restore();
     }
