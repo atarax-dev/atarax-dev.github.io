@@ -4,10 +4,12 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
   const cv = document.createElement('canvas');
   cv.setAttribute('aria-hidden', 'true');
-  cv.style.cssText = 'position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:9998';
+  cv.style.cssText = 'position:fixed;left:0;top:0;pointer-events:none;z-index:9998';
   const ctx = cv.getContext('2d');
   let dpr = 1, raf = 0, S = null;
-  const size = () => { dpr = Math.min(2, devicePixelRatio || 1); cv.width = innerWidth * dpr; cv.height = innerHeight * dpr; };
+  // taille = viewport visuel exact (100vh ≠ innerHeight sur mobile : barre d'adresse) → coordonnées getBoundingClientRect justes
+  const size = () => { dpr = Math.min(2, devicePixelRatio || 1); cv.width = Math.round(innerWidth * dpr); cv.height = Math.round(innerHeight * dpr);
+    cv.style.width = innerWidth + 'px'; cv.style.height = innerHeight + 'px'; };
   addEventListener('resize', size);
 
   // ── squelette (unités ; 1 u ≈ 1,3 px → ~42 px de haut) ──
@@ -101,7 +103,17 @@
     if (!cv.isConnected) { document.body.appendChild(cv); size(); }
     fx = []; scarf.p = [];
     const t0 = performance.now();
-    S = { phase: reduce.matches ? 'still' : 'fall', t: t0, last: t0, x: 0, y: -80, vx: 0, vy: 0, rot: 0, ph: 0, v: 0 };
+    size();
+    // boutons hors écran : on les amène au centre d'abord (défilement doux, instantané en mouvement réduit)
+    const em = rect('.email'), li = rect('.linkedin');
+    const vis = r => r && r.top >= 40 && r.bottom <= innerHeight - 8;
+    let phase = reduce.matches ? 'still' : 'fall';
+    if (em && li && !(vis(em) && vis(li))) {
+      document.querySelector('.email').scrollIntoView({ block: 'center', behavior: reduce.matches ? 'auto' : 'smooth' });
+      if (!reduce.matches) phase = 'wait';
+    }
+    // la chute part juste au-dessus du haut de l'écran visible
+    S = { phase, next: reduce.matches ? 'still' : 'fall', t: t0, last: t0, x: 0, y: -40, vx: 0, vy: 0, rot: 0, ph: 0, v: 0, py: null, calm: 0 };
     raf = requestAnimationFrame(step);
   }
   function step(now) {
@@ -110,9 +122,12 @@
     ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, cv.width, cv.height);
     if (!em || !li) { raf = 0; return; }
     const pt = (now - s.t) / 1000, go = p => { s.phase = p; s.t = now; };
-    const G = 2300, gy = top(em), ly = top(li), stacked = li.top - em.top > 10;
+    const G = 2300, gy = top(em), ly = top(li), stacked = Math.abs(li.top - em.top) > 10;
     let neck = null;
     switch (s.phase) {
+      case 'wait': { // attend la fin du défilement (position stable 6 images, ou 1,2 s max)
+        s.calm = s.py !== null && Math.abs(em.top - s.py) < .5 ? s.calm + 1 : 0; s.py = em.top;
+        if (s.calm >= 6 || pt > 1.2) go(s.next); break; }
       case 'still': { ctx.globalAlpha = clamp(Math.min(pt / .2, (1.4 - pt) / .3), 0, 1);
         neck = draw(standP(pt % .6 < .3 ? 0 : -.3), em.left + 30, gy - STAND * K); ctx.globalAlpha = 1;
         if (pt > 1.4) { ctx.clearRect(0, 0, cv.width, cv.height); raf = 0; return; } break; }
@@ -132,7 +147,7 @@
         break; }
       case 'run': { // sprint : grande foulée, phase de vol, pieds fixes au sol pendant l'appui
         const R = s.R || (s.R = { P: 0, foot: [null, null], prevU: [0, .5], hipX: s.x });
-        const end = em.right - 16, a = 1 - Math.exp(-pt / .32);          // montée en régime
+        const end = stacked ? Math.min(em.right - 16, em.left + Math.max(120, em.width * .5)) : em.right - 16, a = 1 - Math.exp(-pt / .32);          // montée en régime
         const STEP = 56 * lerp(.55, 1, a), CAD = lerp(2.1, 2.8, a);      // px par pas, pas par seconde (≈1,3 × la taille)
         const v = STEP * CAD * clamp((end - s.x) / 25 + .25, 0, 1);      // freine juste avant le bord
         R.P += CAD * dt; s.x = Math.min(end, s.x + v * dt);
@@ -158,8 +173,11 @@
       case 'antic': { // anticipation : on s'accroupit, bras en arrière
         const k = ease(Math.min(1, pt / .14)), hipH = lerp(STAND - .6, 9.5, k);
         neck = draw({ lean: lerp(.3, .55, k), tilt: -.15, fl: [-2.5, hipH], fr: [3.5, hipH], al: [lerp(.2, -1.9, k), .3], ar: [lerp(-.2, -1.7, k), .4] }, s.x, gy - hipH * K);
-        if (k >= 1) { const tx = stacked ? li.left + Math.min(44, li.width * .3) : li.left + 22;
-          s.jump = { x0: s.x, y0: gy, x1: tx, y1: ly, T: stacked ? .5 : .56, h: stacked ? 26 : 50 }; go('air'); } break; }
+        if (k >= 1) {
+          // côte à côte : saut vers la gauche du second bouton ; empilés : petit bond en avant vers le bas (ou plus haut si LinkedIn est au-dessus)
+          const tx = stacked ? Math.min(li.right - 70, Math.max(li.left + 22, s.x + 64)) : li.left + 22;
+          const up = Math.max(0, gy - ly);
+          s.jump = { x0: s.x, y0: gy, x1: tx, y1: ly, T: stacked ? .46 + up / 900 : .56, h: stacked ? 22 + up * .6 : 50 }; go('air'); } break; }
       case 'air': { // impulsion étirée → parabole jambes repliées → descente
         const J = s.jump, k = Math.min(1, pt / J.T), x = lerp(J.x0, J.x1, k);
         const yFeet = lerp(J.y0, J.y1, k) - 4 * J.h * k * (1 - k);
