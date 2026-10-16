@@ -31,6 +31,7 @@
     --rule: #0f100c;
     --mark-bg: #c6ff1a;
     --mark-fg: #0f100c;
+    --focus: #0f100c;
     --shadow: none;
     --shadow-md: none;
     --shadow-lg: none;
@@ -50,6 +51,7 @@
     --rule: #c6ff1a;
     --mark-bg: transparent;
     --mark-fg: #c6ff1a;
+    --focus: #c6ff1a;
 }
 
 /* ── Smooth theme transition (synced with video duration) ── */
@@ -105,8 +107,8 @@ body,
     margin: 0 auto 1.25rem;
     border-radius: 50%;
     overflow: hidden;                          /* clip iOS video overflow */
-    border: 3px solid rgba(255, 255, 255, 0.35);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border: 0;
+    box-shadow: none;
     /* Force GPU layer - évite le débordement Safari */
     -webkit-mask-image: -webkit-radial-gradient(white, black);
     mask-image: radial-gradient(white, black);
@@ -140,10 +142,10 @@ body,
     gap: 0.5rem;
     margin-top: 1rem;
     padding: 0.45rem 1rem;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: transparent;
+    border: 1px solid var(--border-color);
     border-radius: 2rem;
-    color: white;
+    color: var(--text-primary);
     font-size: 0.85rem;
     font-weight: 500;
     font-family: inherit;
@@ -152,7 +154,7 @@ body,
 }
 
 .theme-toggle:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: var(--bg-secondary);
     transform: translateY(-1px);
 }
 
@@ -176,20 +178,20 @@ body,
     z-index: 2;
     display: inline-flex;
     align-items: center;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-primary);
     font-size: 0.75rem;
     font-weight: 600;
     text-decoration: none;
     letter-spacing: 0.1em;
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     padding: 0.2rem 0.5rem;
     transition: color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
 }
 
 .lang-switch:hover {
-    color: white;
-    border-color: rgba(255, 255, 255, 0.6);
+    color: var(--text-primary);
+    border-color: var(--text-primary);
     transform: translateY(-1px);
 }
 
@@ -231,7 +233,7 @@ body::after {
     top: -100px;
     left: 0;
     background: var(--primary-color);
-    color: white;
+    color: var(--ink);
     padding: 8px 16px;
     text-decoration: none;
     z-index: 10000;
@@ -246,7 +248,7 @@ body::after {
     top: 0;
     opacity: 1;
     pointer-events: auto;
-    outline: 2px solid white;
+    outline: 3px solid var(--focus);
     outline-offset: 2px;
 }
 
@@ -287,20 +289,20 @@ body::after {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: white;
+    color: var(--text-primary);
     text-decoration: none;
     padding: 0.75rem 1.5rem;
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: transparent;
     border-radius: 0.5rem;
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--text-primary);
     font-size: 0.95rem;
     font-weight: 500;
 }
 
 .email:hover,
 .linkedin:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: var(--mark-bg);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -526,7 +528,7 @@ main {
 }
 
 .tech-item-large:hover .tech-logo-wrapper {
-    background-color: rgba(37, 99, 235, 0.05);
+    background-color: var(--bg-primary);
     transform: scale(1.05);
 }
 
@@ -578,13 +580,13 @@ main {
 .expertise-icon {
     width: 3rem;
     height: 3rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    background: var(--primary-color);
     border-radius: 0.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 1rem;
-    color: white;
+    color: var(--bg-primary);
     font-size: 1.5rem;
 }
 
@@ -615,7 +617,7 @@ main {
     gap: 0.4rem;
     padding: 0.25rem 0.75rem;
     background-color: var(--primary-color);
-    color: white;
+    color: var(--os);
     border-radius: 1rem;
     font-size: 0.75rem;
     font-weight: 500;
@@ -623,7 +625,7 @@ main {
 }
 
 .tech-tag:hover {
-    background-color: var(--primary-dark);
+    background-color: var(--ink);
     transform: scale(1.05);
 }
 
@@ -733,8 +735,8 @@ main {
 }
 
 .project-tech-tag:hover {
-    border-color: var(--primary-color);
-    background-color: rgba(37, 99, 235, 0.05);
+    border-color: var(--rule);
+    background-color: var(--ink);
 }
 
 .project-tech-tag .tech-logo {
@@ -1003,8 +1005,8 @@ button:focus-visible {
     right: 2rem;
     width: 3rem;
     height: 3rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-    color: white;
+    background: var(--primary-color);
+    color: var(--bg-primary);
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -1027,7 +1029,7 @@ button:focus-visible {
 
 .scroll-to-top:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 20px rgba(37, 99, 235, 0.4);
+    box-shadow: none;
 }
 
 .scroll-to-top:active {
@@ -1102,7 +1104,7 @@ main{padding:24px 32px 64px;counter-reset:s}
 .footer{font-size:.9rem;background:transparent;border-top:3px solid var(--rule);margin:0 32px;padding:24px 0 48px;text-align:left;color:var(--secondary-color)}
 .scroll-to-top{background:var(--primary-color);color:var(--bg-primary);border-radius:6px;width:48px;height:48px}
 .skip-link{background:var(--acid);color:var(--ink)}
-a:focus-visible,button:focus-visible{outline:3px solid var(--acid);outline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
 @media (max-width:760px){
  .header{padding:24px 20px 32px}.header::before{margin-bottom:28px}.lang-switch{top:24px;right:20px}
  .header-content{position:relative;z-index:1;margin:0 auto;grid-template-columns:1fr;grid-template-areas:"photo" "name" "title" "loc" "contact" "toggle"}
